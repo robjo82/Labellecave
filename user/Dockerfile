@@ -11,6 +11,15 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:21
 
+RUN mkdir /app
+
 COPY --from=build /build/user/target/user-*.jar /app/user.jar
 
-ENTRYPOINT ["java","-jar","/app/user.jar"]
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN chown -R appuser:appuser /app
+
+USER appuser
+
+WORKDIR /app
+
+ENTRYPOINT ["java","-jar","user.jar"]

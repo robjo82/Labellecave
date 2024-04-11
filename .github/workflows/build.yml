@@ -32,15 +32,7 @@ jobs:
         run: mvn -f user/pom.xml clean package
 
       - name: SonarCloud analysis user module
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=robjo82_Labellecave
-            -Dsonar.organization=robjo82
-            -Dsonar.java.binaries=user/target/classes
+        run: mvn -f user/pom.xml verify org.sonarsource.scanner.maven:sonar -Dsonar.projectKey=robjo82_Labellecave -Dsonar.organization=robjo82 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: Semantic Release
         run: npm run semantic-release
