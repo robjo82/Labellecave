@@ -15,9 +15,8 @@ RUN mkdir /app
 
 COPY --from=build /build/product/target/product-*.jar /app/product.jar
 
-RUN groupadd -r appproduct && \
-    useradd -r -g appproduct appproduct && \
-    chown -R appproduct:appproduct /app
+RUN groupadd -r appproduct && useradd -r -g appproduct appproduct
+RUN chown -R appproduct:appproduct /app
 
 USER appproduct
 

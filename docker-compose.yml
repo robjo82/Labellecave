@@ -21,5 +21,12 @@ services:
     ports:
       - "8484:8484"
 
+  product:
+    depends_on:
+      - postgres
+    image: registry.robin-joseph.fr/labellecave-product:latest
+    ports:
+      - "8485:8485"
+
 volumes:
   postgres_data:

@@ -20,7 +20,7 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        String baseUrl = (serverPort == 80 || serverPort == 443 || serverPort == 8484) ? "https://labellecave-product.robin-joseph.fr" : "http://localhost:" + serverPort;
+        String baseUrl = (serverPort == 80 || serverPort == 443 || serverPort == 8485) ? "https://labellecave-product.robin-joseph.fr" : "http://localhost:" + serverPort;
 
         return new OpenAPI()
                 .components(new Components()
