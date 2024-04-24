@@ -17,13 +17,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Fetch all history
-        run: git fetch --unshallow
+          fetch-depth: 0  # Fetch all history for all tags and branches
 
       - name: Reset branch to remote
-        run: git reset --hard origin/main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
