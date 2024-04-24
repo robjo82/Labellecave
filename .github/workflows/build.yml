@@ -39,6 +39,12 @@ jobs:
       - name: SonarCloud analysis user module
         run: mvn -f user/pom.xml sonar:sonar -Dsonar.projectKey=robjo82_Labellecave -Dsonar.organization=robjo82 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
+      - name: Build product module
+        run: mvn -f product/pom.xml clean package
+
+      - name: SonarCloud analysis product module
+        run: mvn -f product/pom.xml sonar:sonar -Dsonar.projectKey=robjo82_Labellecave -Dsonar.organization=robjo82 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
       - name: Semantic Release
         run: npm run semantic-release
         env:
