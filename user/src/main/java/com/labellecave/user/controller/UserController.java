@@ -69,7 +69,7 @@ public class UserController {
     public ResponseEntity<UserDto> getUser(@PathVariable long id, Authentication authentication) {
 
         String token = authentication.getPrincipal().toString();
-        if (authService.isAdminOrSameUser(token, id)) {
+        if (authService.isNotAdminOrSameUser(token, id)) {
             throw new ForbiddenException("You are not allowed to access this resource.");
         } else {
             UserDto user = userService.getUser(id);
@@ -90,7 +90,7 @@ public class UserController {
     @ApiResponse(responseCode = "404", description = "User not found", content = @Content(schema = @Schema(implementation = ExceptionDto.class)))
     public ResponseEntity<UserDto> updateUser(@PathVariable long id, @Valid @RequestBody UserDto userDto, Authentication authentication) {
         String token = authentication.getPrincipal().toString();
-        if (authService.isAdminOrSameUser(token, id)) {
+        if (authService.isNotAdminOrSameUser(token, id)) {
             throw new ForbiddenException("You are not allowed to access this resource.");
         } else {
             UserDto updatedUser = userService.updateUser(id, userDto);
@@ -111,7 +111,7 @@ public class UserController {
     @ApiResponse(responseCode = "404", description = "User not found", content = @Content(schema = @Schema(implementation = ExceptionDto.class)))
     public ResponseEntity<Void> deleteUser(@PathVariable long id, Authentication authentication) {
         String token = authentication.getPrincipal().toString();
-        if (authService.isAdminOrSameUser(token, id)) {
+        if (authService.isNotAdminOrSameUser(token, id)) {
             throw new ForbiddenException("You are not allowed to access this resource.");
         } else {
             userService.deleteUser(id);
