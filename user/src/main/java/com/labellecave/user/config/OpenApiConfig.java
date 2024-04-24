@@ -15,12 +15,12 @@ import java.util.List;
 @Configuration
 public class OpenApiConfig {
 
-    @Value("${server.port:8082}")
+    @Value("${server.port:80}")
     private int serverPort;
 
     @Bean
     public OpenAPI customOpenAPI() {
-        String baseUrl = (serverPort == 80 || serverPort == 443 || serverPort == 8484) ? "https://labellecave-user.robin-joseph.fr" : "http://localhost:" + serverPort;
+        String baseUrl = (serverPort == 80 || serverPort == 443) ? "https://labellecave-user.robin-joseph.fr" : "http://localhost:" + serverPort;
 
         return new OpenAPI()
                 .components(new Components()

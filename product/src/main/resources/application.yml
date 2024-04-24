@@ -1,5 +1,5 @@
 server:
-  port: 8485
+  port: 80
 
 spring:
   datasource:
@@ -20,10 +20,10 @@ logging:
   level:
     org:
       hibernate:
-        SQL: debug
+        SQL: info
       springframework:
         jdbc:
-          core: debug
+          core: info
     root: info
 
 jwt:
