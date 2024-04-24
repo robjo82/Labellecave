@@ -2,7 +2,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
-    container_name: postgres_container
+    container_name: postgres
     restart: always
     environment:
       POSTGRES_USER: labellecave
@@ -13,6 +13,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  user:
+    depends_on:
+      - postgres
+    image: registry.robin-joseph.fr/labellecave-user:latest
+    ports:
+      - "8484:8484"
 
 volumes:
   postgres_data:
